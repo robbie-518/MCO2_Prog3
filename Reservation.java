@@ -30,7 +30,7 @@ public class Reservation {
         return this.guestName;
     }
     
-    public double calculateReservationPrice(Hotel hotel) { 
+    public double calculateReservationPrice(Hotel hotel) { // calculate reservation price without discount
     	
     	double price = 0;
     	
@@ -38,11 +38,10 @@ public class Reservation {
     		price += this.room.getRoomRate() * hotel.getBasePrice() * hotel.getDateModifier()[i - 1];
     	}
     	
-    	this.reservationPrice = price;
     	return price;
     }
 
-    public double calculateReservationPriceDISCOUNT(Hotel hotel, String code) { 
+    public double calculateReservationPriceDISCOUNT(Hotel hotel, String code) {  // calculate reservation price with discount
     	
     	double price = 0;
     	
@@ -50,9 +49,7 @@ public class Reservation {
     	
     	
     	if (code.equals("I_WORK_HERE")) {
-    		for (int i = this.checkInDate; i < this.checkOutDate; i++) {
-        		price += this.room.getRoomRate() * hotel.getBasePrice() * hotel.getDateModifier()[i - 1];
-        	}
+    		price = calculateReservationPrice(hotel);
     		price *= 0.9;
     	}
     	
@@ -62,25 +59,18 @@ public class Reservation {
         	}    		 		
     	}
     	
-    	else if (code.equals("PAYDAY")) {
-    		
+    	else if (code.equals("PAYDAY")) {    		
     		if ((isDateInRange(this.checkInDate, this.checkOutDate, 15)) || (isDateInRange(this.checkInDate, this.checkOutDate, 30))) {
-    			for (int i = this.checkInDate; i < this.checkOutDate; i++) {
-    	    		price += this.room.getRoomRate() * hotel.getBasePrice() * hotel.getDateModifier()[i - 1];
-    	    	}
+    			price = calculateReservationPrice(hotel);
         		price *= 0.93;    			
-    		}
-    		
+    		}    		
     	}
     	
     	else {
-    		for (int i = this.checkInDate; i < this.checkOutDate; i++) {
-        		price += this.room.getRoomRate() * hotel.getBasePrice() * hotel.getDateModifier()[i - 1];
-        	}
+    		price = calculateReservationPrice(hotel);
     	}
     		
     	
-    	this.reservationPrice = price;    	
     	return price;
     }
     
