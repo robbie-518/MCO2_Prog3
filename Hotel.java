@@ -98,11 +98,11 @@ public class Hotel {
     }
 
    
-    public double getEstimatedEarnings(ArrayList<Reservation> reservations){
+    public double getEstimatedEarnings() {    
     	
-    	double estimatedEarnings = 0;
+    	double estimatedEarnings = 0;        	
     	
-        for (Reservation reservation : reservations) {
+        for (Reservation reservation : this.reservations) {
         	   	estimatedEarnings += reservation.getReservationPrice();
         }
         

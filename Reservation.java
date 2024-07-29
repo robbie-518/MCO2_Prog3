@@ -30,7 +30,7 @@ public class Reservation {
         return this.guestName;
     }
     
-    public double calculateReservationPrice(Hotel hotel) { // calculate reservation price without discount
+    public double calculateReservationPrice(Hotel hotel) { // calculate reservation price
     	
     	double price = 0;
     	
@@ -40,8 +40,12 @@ public class Reservation {
     	
     	return price;
     }
+    
+    public void updateReservationPrice(Hotel hotel) { // update price without discount code
+    	this.reservationPrice = calculateReservationPrice(hotel);
+    }
 
-    public double calculateReservationPriceDISCOUNT(Hotel hotel, String code) {  // calculate reservation price with discount
+    public void updateReservationPriceDISCOUNT(Hotel hotel, String code) {  // update reservation price with discount
     	
     	double price = 0;
     	
@@ -71,7 +75,7 @@ public class Reservation {
     	}
     		
     	
-    	return price;
+    	this.reservationPrice = price;
     }
     
     public boolean isDateInRange(int checkIn, int checkOut, int day) {
