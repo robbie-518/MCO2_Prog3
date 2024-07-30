@@ -75,5 +75,70 @@ public class Room {
     	return this.roomRate;
     }
     
+    public boolean isAvailable(int day) {
+    	if (availability[day - 1] == true)
+    		return true;
+    	else
+    		return false;
+    }
+    
+    public double getPricePerNight(Hotel hotel) {
+    	return hotel.getBasePrice() * this.getRoomRate();
+    }
+    
+    public String getAvailableDates() {
+        StringBuilder sb = new StringBuilder();
+        
+        int counter = 0;
+        
+        for (int i = 0; i < availability.length; i++) { // if all are unavailable, return none
+        	if (!availability[i]) {
+        		counter++;
+        	}
+        }
+        
+        if (counter == 31) {
+        	sb.append("None");
+        	return sb.toString();
+        }
+        
+        for (int i = 0; i < availability.length; i++) {
+            if (availability[i]) {
+                if (sb.length() > 0) {
+                    sb.append(", ");
+                }
+                sb.append(i + 1);
+            }
+        }
+        return sb.toString();
+    }
+    
+    public String getBookedDates() {
+        StringBuilder sb = new StringBuilder();
+        
+        int counter = 0;
+        
+        for (int i = 0; i < availability.length; i++) { // if all are available, return none
+        	if (availability[i]) {
+        		counter++;
+        	}
+        }
+        
+        if (counter == 31) {
+        	sb.append("None");
+        	return sb.toString();
+        }
+        	
+       
+        for (int i = 0; i < availability.length; i++) {
+            if (!availability[i]) {
+                if (sb.length() > 0) {
+                    sb.append(", ");
+                }
+                sb.append(i + 1);
+            }
+        }
+        return sb.toString();
+    }
     
 }

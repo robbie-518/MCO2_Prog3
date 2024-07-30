@@ -85,6 +85,23 @@ public class Reservation {
     public double getReservationPrice() {
     	return this.reservationPrice;
     }
+    
+    public String getPriceForEachNight(Hotel hotel, int checkInDate, int checkOutDate) {
+        StringBuilder prices = new StringBuilder();
+        
+        for (int i = checkInDate; i < checkOutDate; i++) {
+            double price = this.room.getRoomRate() * hotel.getBasePrice() * hotel.getDateModifier()[i - 1];
+            prices.append(String.format("- Day %d: Php %.2f\n", i, price));
+        }
+        
+        return prices.toString();
+    }
+    
+    public String getPriceBreakdown(Hotel hotel) {
+        return "Price per night:\n" + getPriceForEachNight(hotel, this.checkInDate, this.checkOutDate) + 
+               "\nTotal nights: " + (this.checkOutDate - this.checkInDate) + 
+               "\nTotal price: " + this.reservationPrice;
+    }
 
 
 }

@@ -129,6 +129,26 @@ public class Hotel {
     public int getNumReservation() {
     	return this.numReservations;
     }
+    
+    public int getAvailableRooms(int day) {
+        int availableRooms = 0;
+        for (Room room : rooms) {
+            if (room.isAvailable(day)) {
+                availableRooms++;
+            }
+        }
+        return availableRooms;
+    }
+    
+    public int getBookedRooms(int day) {
+        int bookedRooms = 0;
+        for (Room room : rooms) {
+            if (!room.isAvailable(day)) {
+                bookedRooms++;
+            }
+        }
+        return bookedRooms;
+    }
 
 
 
