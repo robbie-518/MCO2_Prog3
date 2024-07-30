@@ -7,11 +7,13 @@ public class Reservation {
     private Room room;
 
 
-    public Reservation(String guestName, int checkInDate, int checkOutDate, Room room) {
+    public Reservation(Hotel hotel, String guestName, int checkInDate, int checkOutDate, Room room, String discountCode) {
         this.guestName = guestName;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.room = room;  
+        this.reservationPrice = calculateReservationPrice(hotel);
+        updateReservationPriceDISCOUNT(hotel, discountCode);
     }
 
     public int getCheckInDate() {
@@ -41,41 +43,29 @@ public class Reservation {
     	return price;
     }
     
-    public void updateReservationPrice(Hotel hotel) { // update price without discount code
-    	this.reservationPrice = calculateReservationPrice(hotel);
-    }
 
     public void updateReservationPriceDISCOUNT(Hotel hotel, String code) {  // update reservation price with discount
     	
-    	double price = 0;
+
     	
     	int lengthReservation = this.checkOutDate - this.checkInDate + 1;
     	
     	
     	if (code.equals("I_WORK_HERE")) {
-    		price = calculateReservationPrice(hotel);
-    		price *= 0.9;
+    		this.reservationPrice *= 0.9;
     	}
     	
     	else if (code.equals("STAY4_GET1") && lengthReservation >= 5) {    
-    		for (int i = this.checkInDate + 1; i < this.checkOutDate; i++) {
-        		price += this.room.getRoomRate() * hotel.getBasePrice() * hotel.getDateModifier()[i - 1];
-        	}    		 		
+    		double firstDayPrice = room.getPricePerNight(hotel) * hotel.getDateModifier()[this.checkInDate - 1];
+            this.reservationPrice -= firstDayPrice;
     	}
     	
     	else if (code.equals("PAYDAY")) {    		
     		if ((isDateInRange(this.checkInDate, this.checkOutDate, 15)) || (isDateInRange(this.checkInDate, this.checkOutDate, 30))) {
-    			price = calculateReservationPrice(hotel);
-        		price *= 0.93;    			
+        		this.reservationPrice *= 0.93; 			
     		}    		
-    	}
-    	
-    	else {
-    		price = calculateReservationPrice(hotel);
-    	}
-    		
-    	
-    	this.reservationPrice = price;
+    	}    		
+
     }
     
     public boolean isDateInRange(int checkIn, int checkOut, int day) {
@@ -86,7 +76,7 @@ public class Reservation {
     	return this.reservationPrice;
     }
     
-    public String getPriceForEachNight(Hotel hotel, int checkInDate, int checkOutDate) {
+    public String getPricePerNight(Hotel hotel, int checkInDate, int checkOutDate) {
         StringBuilder prices = new StringBuilder();
         
         for (int i = checkInDate; i < checkOutDate; i++) {
@@ -98,7 +88,7 @@ public class Reservation {
     }
     
     public String getPriceBreakdown(Hotel hotel) {
-        return "Price per night:\n" + getPriceForEachNight(hotel, this.checkInDate, this.checkOutDate) + 
+        return "Price per night:\n" + getPricePerNight(hotel, this.checkInDate, this.checkOutDate) + 
                "\nTotal nights: " + (this.checkOutDate - this.checkInDate) + 
                "\nTotal price: " + this.reservationPrice;
     }

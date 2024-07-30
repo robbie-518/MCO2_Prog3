@@ -1,5 +1,4 @@
 import javax.swing.SwingUtilities;
-import java.util.ArrayList;
 
 public class Main {
 
@@ -8,7 +7,7 @@ public class Main {
 			
 		SwingUtilities.invokeLater(new Runnable() {
 	        public void run() {
-	            new CardLayoutTest();
+	            new CardLayoutGUI();
 	        }
 	    });
 	

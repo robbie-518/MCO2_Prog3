@@ -90,6 +90,9 @@ public class Hotel {
             }
         }
         if (reservationToRemove != null) {
+            for (int i = reservationToRemove.getCheckInDate() - 1; i < reservationToRemove.getCheckOutDate() - 1; i++) {
+                reservationToRemove.getRoom().setAvailability(i, true);
+            }
             reservations.remove(reservationToRemove);
             numReservations--;
         }
@@ -116,7 +119,7 @@ public class Hotel {
     	
     	double estimatedEarnings = 0;        	
     	
-        for (Reservation reservation : this.reservations) {
+        for (Reservation reservation : reservations) {
         	   	estimatedEarnings += reservation.getReservationPrice();
         }
         
@@ -132,7 +135,7 @@ public class Hotel {
     }
     
     public void changeDateModifier(int dayIndex, double multiplier) {
-    	this.dateModifier[dayIndex - 1] = multiplier / 100;
+    	this.dateModifier[dayIndex - 1] = multiplier;
     }
     
     public double[] getDateModifier() {

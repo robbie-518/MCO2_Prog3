@@ -97,7 +97,7 @@ public class Room {
         	}
         }
         
-        if (counter == 31) {
+        if (counter == 30) {
         	sb.append("None");
         	return sb.toString();
         }
