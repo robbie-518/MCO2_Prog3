@@ -43,42 +43,56 @@ public class Hotel {
         }
     }
 
+    
     public boolean addRoom(String roomName) {
         if (rooms.size() < 50) {
             this.rooms.add(new Room(roomName));
             this.numRoom++;
             return true;
-        }
-        else {
+        } else {
             return false;
-        }        
+        }
     }
 
-    public boolean removeRoom(int roomNum) {
-        boolean[] tempAvailability;
-        tempAvailability = rooms.get(roomNum-1).getAvailability();
-        boolean roomValid = true;
+    public boolean addRoom(String roomName, String roomType) {
+        if (rooms.size() < 50) {
+            this.rooms.add(new Room(roomName, roomType));
+            this.numRoom++;
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-        for (int i = 0; i < tempAvailability.length; i++) {
-            if (tempAvailability[i] == false) {
-                roomValid = false;
+    public boolean removeRoom(String roomName) {
+        Room roomToRemove = null;
+        for (Room room : rooms) {
+            if (room.getName().equals(roomName) && room.isCompletelyAvailable()) {
+                roomToRemove = room;
+                break;
             }
         }
-
-        if (rooms.size() > 1 && roomValid == true) {
-            this.rooms.remove(roomNum-1);
-            this.numRoom--;  // Decrement the number of rooms
+        if (roomToRemove != null && rooms.size() > 5) {
+            rooms.remove(roomToRemove);
+            numRoom--;
             return true;
         }
-        else {
-            return false;
-        }       
+        return false;
     }
     
 
-    public void removeReservation(int index) { 
-        this.reservations.remove(index);
-        this.numReservations--;
+    public void removeReservation(String guestName) {
+        Reservation reservationToRemove = null;
+        for (Reservation reservation : reservations) {
+            if (reservation.getGuestName().equals(guestName)) {
+                reservationToRemove = reservation;
+                break;
+            }
+        }
+        if (reservationToRemove != null) {
+            reservations.remove(reservationToRemove);
+            numReservations--;
+        }
     }
 
     public String getHotelName(){

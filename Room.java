@@ -3,40 +3,44 @@ import java.util.Arrays;
 public class Room {
     private String name;
     private boolean[] availability;
-    private RoomType type;
+    private String type;
     private double roomRate;
 
-    enum RoomType {
-        STANDARD,
-        DELUXE,
-        EXECUTIVE
-    }
 
-    public Room(String name){
-        this.type = RoomType.STANDARD;
+    public Room(String name) {
+        this.type = "STANDARD";
         this.roomRate = 1;
         this.name = name;
         this.availability = new boolean[31]; //availability for all 31 days of the month
         Arrays.fill(this.availability, true);
     }
-    
-    public Room(String name, RoomType newType) {
-    	this.type = newType;
+
+    public Room(String name, String newType) {
         this.name = name;
         this.availability = new boolean[31]; //availability for all 31 days of the month
         Arrays.fill(this.availability, true);
-        
-        switch (type) {
-        case DELUXE:
-            this.roomRate = 1.2;
-        case EXECUTIVE:
-            this.roomRate = 1.35;
-        case STANDARD:
-        default:
-            this.roomRate = 1;
+
+        switch (newType.toUpperCase()) {
+            case "DELUXE":
+                this.type = "DELUXE";
+                this.roomRate = 1.2;
+                break;
+            case "EXECUTIVE":
+                this.type = "EXECUTIVE";
+                this.roomRate = 1.35;
+                break;
+            case "STANDARD":
+            default:
+                this.type = "STANDARD";
+                this.roomRate = 1;
+                break;
         }
     }
-
+    
+    public void bookDate(int i) {
+    	availability[i - 1] = false;
+    }
+    
     public boolean setAvailability(int day) { // changes date availability, returns true if successful
         if (availability[day] == true) {
             availability[day] = false;
@@ -63,12 +67,8 @@ public class Room {
         return this.name;
     }
 
-    public RoomType getType() {
+    public String getType() {
     	return this.type;
-    }
-    
-    public void setType(RoomType type) {
-    	this.type = type;
     }
     
     public double getRoomRate() {
@@ -139,6 +139,15 @@ public class Room {
             }
         }
         return sb.toString();
+    }
+    
+    public boolean isCompletelyAvailable() {
+        for (boolean dayAvailable : availability) {
+            if (!dayAvailable) {
+                return false;
+            }
+        }
+        return true;
     }
     
 }
