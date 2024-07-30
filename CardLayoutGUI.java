@@ -129,7 +129,7 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
     private JLabel availableRoomsLabel, bookedRoomsLabel, roomNameLabel, roomTypeLabel;
     private JLabel dateLabel, pricePerNightLabel;
     private JLabel availableDatesLabel, bookedDatesLabel;
-    private JLabel guestNameLabel, checkInLabel, checkOutLabel, totalPriceLabel, reservationRoomNameLabel;
+    private JLabel guestNameLabel, checkInLabel, checkOutLabel, totalPriceLabel, reservationRoomNameLabel, reservationRoomTypeLabel;
     private JPanel priceBreakdownPanel;
 
     private ArrayList<Hotel> hotels;
@@ -375,10 +375,16 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
         JButton removeRoomButton = new JButton("Remove Room");
         removeRoomButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if (selectedHotel == null) {
+                    JOptionPane.showMessageDialog(null, "No hotel selected.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
                 updatePanelFifteen();
                 cardlayout.show(rootPanel, "Panel Fifteen");
             }
         });
+
 
         JButton updateBasePriceButton = new JButton("Update Base Price");
         updateBasePriceButton.addActionListener(new ActionListener() {
@@ -656,12 +662,14 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
 
         guestNameLabel = new JLabel();
         reservationRoomNameLabel = new JLabel();
+        reservationRoomTypeLabel = new JLabel();
         checkInLabel = new JLabel();
         checkOutLabel = new JLabel();
         totalPriceLabel = new JLabel();
 
         detailsPanel.add(guestNameLabel);
         detailsPanel.add(reservationRoomNameLabel);
+        detailsPanel.add(reservationRoomTypeLabel);
         detailsPanel.add(checkInLabel);
         detailsPanel.add(checkOutLabel);
         detailsPanel.add(totalPriceLabel);
@@ -1048,6 +1056,7 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
 		    if (selectedReservation != null) {
 		        guestNameLabel.setText("Guest Name: " + selectedReservation.getGuestName());
 		        reservationRoomNameLabel.setText("Room Name: " + selectedReservation.getRoom().getName());
+		        reservationRoomTypeLabel.setText("Room Type: " + selectedReservation.getRoom().getType());
 		        checkInLabel.setText("Check-in day: " + selectedReservation.getCheckInDate());
 		        checkOutLabel.setText("Check-out day: " + selectedReservation.getCheckOutDate());
 		        totalPriceLabel.setText(String.format("Total Price: Php %.2f", selectedReservation.getReservationPrice()));
@@ -1066,40 +1075,46 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
 
 	 
 	 /**
-	 * Updates the panel displaying buttons for removing rooms.
-	 */
+	  * Updates the panel displaying buttons for removing rooms.
+	  */
 	 private void updatePanelFifteen() {
-	        panelFifteen_RoomButtons.removeAll();
-	        if (selectedHotel != null) {
-	            for (Room room : selectedHotel.getRooms()) {
-	                JButton roomButton = new JButton(room.getName());
-	                roomButton.addActionListener(new ActionListener() {
-	                    public void actionPerformed(ActionEvent e) {
-	                        int confirm = JOptionPane.showConfirmDialog(null,
-	                                "Are you sure you want to delete the room: " + room.getName() + "?", "Confirm Deletion",
-	                                JOptionPane.YES_NO_OPTION);
-	                        if (confirm == JOptionPane.YES_OPTION) {
-	                            if (selectedHotel.getRooms().size() > 5) {
-	                                selectedHotel.removeRoom(room.getName());
-	                                updateHotelInfoPanels();
-	                                cardlayout.show(rootPanel, "Panel Four");
-	                                JOptionPane.showMessageDialog(null, "Room deleted successfully.", "Success",
-	                                        JOptionPane.INFORMATION_MESSAGE);
-	                            } else {
-	                                JOptionPane.showMessageDialog(null, "Cannot delete room. Minimum room limit reached.",
-	                                        "Error", JOptionPane.ERROR_MESSAGE);
-	                            }
-	                        } else {
-	                            cardlayout.show(rootPanel, "Panel Four");
-	                        }
-	                    }
-	                });
-	                panelFifteen_RoomButtons.add(roomButton);
-	            }
-	        }
-	        panelFifteen_RoomButtons.revalidate();
-	        panelFifteen_RoomButtons.repaint();
-	    }
+	     panelFifteen_RoomButtons.removeAll();
+	     if (selectedHotel != null) {
+	         for (Room room : selectedHotel.getRooms()) {
+	             JButton roomButton = new JButton(room.getName());
+	             roomButton.addActionListener(new ActionListener() {
+	                 public void actionPerformed(ActionEvent e) {
+	                     if (!room.hasReservation()) {
+	                         int confirm = JOptionPane.showConfirmDialog(null,
+	                                 "Are you sure you want to delete the room: " + room.getName() + "?", "Confirm Deletion",
+	                                 JOptionPane.YES_NO_OPTION);
+	                         if (confirm == JOptionPane.YES_OPTION) {
+	                             if (selectedHotel.getRooms().size() > 5) {
+	                                 selectedHotel.removeRoom(room.getName());
+	                                 updateHotelInfoPanels();
+	                                 cardlayout.show(rootPanel, "Panel Four");
+	                                 JOptionPane.showMessageDialog(null, "Room deleted successfully.", "Success",
+	                                         JOptionPane.INFORMATION_MESSAGE);
+	                             } else {
+	                                 JOptionPane.showMessageDialog(null, "Cannot delete room. Minimum room limit reached.",
+	                                         "Error", JOptionPane.ERROR_MESSAGE);
+	                             }
+	                         } else {
+	                             cardlayout.show(rootPanel, "Panel Four");
+	                         }
+	                     } else {
+	                         JOptionPane.showMessageDialog(null, "Cannot delete room. It has reservations.",
+	                                 "Error", JOptionPane.ERROR_MESSAGE);
+	                     }
+	                 }
+	             });
+	             panelFifteen_RoomButtons.add(roomButton);
+	         }
+	     }
+	     panelFifteen_RoomButtons.revalidate();
+	     panelFifteen_RoomButtons.repaint();
+	 }
+
 
 	 
 	 /**
