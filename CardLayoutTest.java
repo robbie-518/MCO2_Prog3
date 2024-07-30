@@ -23,7 +23,6 @@ import javax.swing.JButton;
 public class CardLayoutTest extends JFrame implements ActionListener {
 	
 	JButton btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
-
     JButton btn1_back_fromPanelTwo, btn1_back_fromPanelThree, btn1_back_fromPanelEight, btn1_back_fromPanelNine;
     JButton btn3_back_fromPanelFour, btn3_back_fromPanelFive;
     JButton btn5_back_fromPanelSix, btn5_back_fromPanelSeven;
@@ -31,8 +30,8 @@ public class CardLayoutTest extends JFrame implements ActionListener {
     CardLayout cardlayout;
     JPanel rootPanel;
     JPanel panelOne, panelTwo, panelThree, panelFour, panelFive, panelSix, panelSeven, panelEight, panelNine;
-    JPanel panelTen, panelEleven, panelTwelve, panelThirteen, panelFourteen, panelFifteen, panelSixteen, panelSeventeen;
-    JPanel panelNine_HotelButtons, panelEleven_RoomButtons, panelFifteen_RoomButtons, panelThirteen_ReservationButtons, panelSeventeen_DayButtons;
+    JPanel panelTen, panelEleven, panelTwelve, panelThirteen, panelFourteen, panelFifteen, panelSixteen, panelSeventeen, panelEighteen;
+    JPanel panelNine_HotelButtons, panelEleven_RoomButtons, panelFifteen_RoomButtons, panelThirteen_ReservationButtons, panelSeventeen_DayButtons, panelEight_RoomButtons;
 
     private JLabel hotelNameLabel, totalRoomsLabel, estimatedEarningsLabel;
     private JLabel availableRoomsLabel, bookedRoomsLabel, roomNameLabel, roomTypeLabel;
@@ -102,22 +101,17 @@ public class CardLayoutTest extends JFrame implements ActionListener {
 	      
 	        
 	    // Create Panel One
-	    JPanel panelOneButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-	    panelOneButtons.add(btn2);
-	    panelOneButtons.add(btn9);
-	    panelOneButtons.add(btn3);
-	    panelOneButtons.add(btn8);
-	        
-	    panelOne = new JPanel(new BorderLayout());
-	    panelOne.setBackground(Color.CYAN);
-	    panelOne.add(new JLabel("This is Main Panel"), BorderLayout.NORTH);
-	    panelOne.add(panelOneButtons, BorderLayout.SOUTH);
+	    panelOne = new JPanel(new GridLayout(5, 1, 10, 10));
+	    panelOne.add(new JLabel("Main Panel"));
+	    panelOne.add(btn2);
+	    panelOne.add(btn9);
+	    panelOne.add(btn3);
+	    panelOne.add(btn8);
 	    
 	        
 	        
 	    // Create Panel Two
 	    panelTwo = new JPanel(new BorderLayout());
-	    panelTwo.setBackground(Color.MAGENTA);
 	    panelTwo.add(new JLabel("Create Hotel Panel"), BorderLayout.NORTH);
 	    
 	    
@@ -202,7 +196,6 @@ public class CardLayoutTest extends JFrame implements ActionListener {
 	        
 	    // Create Panel Three	    
 	    panelThree = new JPanel(new BorderLayout());
-	    panelThree.setBackground(Color.RED);
 	    panelThree.add(new JLabel("This is Hotel Managing Panel"), BorderLayout.NORTH);
 	   
 	    
@@ -216,7 +209,7 @@ public class CardLayoutTest extends JFrame implements ActionListener {
 	   
 	    // Create Panel Four
 	    panelFour = new JPanel(new GridLayout(7, 1, 10, 10));
-        panelFour.setBackground(Color.PINK);
+        
 
         JButton changeHotelNameButton = new JButton("Change Hotel Name");
         changeHotelNameButton.addActionListener(new ActionListener() {
@@ -355,7 +348,6 @@ public class CardLayoutTest extends JFrame implements ActionListener {
 	    
 	    // Create Panel Five
 	    panelFive = new JPanel(new BorderLayout());
-	    panelFive.setBackground(Color.YELLOW);
 	    panelFive.add(new JLabel("This is View Hotel Info Panel"), BorderLayout.NORTH);
 	    
 	    JPanel panelFiveButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
@@ -367,7 +359,6 @@ public class CardLayoutTest extends JFrame implements ActionListener {
 	        
 	    // Create Panel Six
 	    panelSix = new JPanel(new BorderLayout());
-        panelSix.setBackground(Color.ORANGE);
         panelSix.add(new JLabel("This is High Level Info Panel"), BorderLayout.NORTH);
 
         // labels to be added to panelSixContent
@@ -389,11 +380,10 @@ public class CardLayoutTest extends JFrame implements ActionListener {
 	    
 	    // Create Panel Seven
 	    panelSeven = new JPanel(new BorderLayout());
-	    panelSeven.setBackground(Color.GRAY);
 	    panelSeven.add(new JLabel("This is Low Level Info Panel"), BorderLayout.NORTH);
 	    
         
-        // buttons for high level info
+        // buttons for panel seven
         JButton chooseDateButton = new JButton("Choose Date");
         JButton chooseRoomButton = new JButton("Choose Room");
         JButton chooseReservationButton = new JButton("Choose Reservation");
@@ -441,23 +431,23 @@ public class CardLayoutTest extends JFrame implements ActionListener {
         panelSevenButtons.add(btn5_back_fromPanelSeven);
         panelSeven.add(panelSevenButtons, BorderLayout.SOUTH);
 	    
-	    // Create Panel Eight
-	    panelEight = new JPanel(new BorderLayout());
-	    panelEight.setBackground(Color.LIGHT_GRAY);
-	    panelEight.add(new JLabel("This is Make Reservation Panel"), BorderLayout.NORTH);
-	    
-	    JPanel panelEightButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-	    panelEightButtons.add(btn1_back_fromPanelEight);
-	    panelEight.add(panelEightButtons, BorderLayout.SOUTH);
+        // Create Panel Eight
+        panelEight = new JPanel(new BorderLayout());
+        panelEight.add(new JLabel("This is Make Reservation Panel"), BorderLayout.NORTH);
+
+        panelEight_RoomButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        panelEight.add(panelEight_RoomButtons, BorderLayout.CENTER);
+
+        JPanel panelEightButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        panelEightButtons.add(btn1_back_fromPanelEight);
+        panelEight.add(panelEightButtons, BorderLayout.SOUTH);
 	    
 	    // Create Panel Nine
 	    panelNine = new JPanel(new BorderLayout());
-	    panelNine.setBackground(Color.MAGENTA);
 	    panelNine.add(new JLabel("Choose a Hotel"), BorderLayout.NORTH);
 	    
 	    // Panel for dynamically adding hotel buttons
 	    panelNine_HotelButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-	    panelNine_HotelButtons.setBackground(Color.blue);
 	    panelNine.add(panelNine_HotelButtons, BorderLayout.CENTER);
 
 	    JPanel panelNineButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
@@ -467,7 +457,6 @@ public class CardLayoutTest extends JFrame implements ActionListener {
 	    
 	    // Create Panel Ten
         panelTen = new JPanel(new BorderLayout());
-        panelTen.setBackground(Color.LIGHT_GRAY);
         dateLabel = new JLabel();
         availableRoomsLabel = new JLabel();
         bookedRoomsLabel = new JLabel();
@@ -493,7 +482,6 @@ public class CardLayoutTest extends JFrame implements ActionListener {
 	    
 	    // Create Panel Eleven
         panelEleven = new JPanel(new BorderLayout());
-        panelEleven.setBackground(Color.LIGHT_GRAY);
 
         panelEleven_RoomButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         panelEleven.add(panelEleven_RoomButtons, BorderLayout.CENTER);
@@ -514,7 +502,6 @@ public class CardLayoutTest extends JFrame implements ActionListener {
         
         // Create Panel Twelve
         panelTwelve = new JPanel(new BorderLayout());
-        panelTwelve.setBackground(Color.LIGHT_GRAY);
 
         roomNameLabel = new JLabel();
         roomTypeLabel = new JLabel();
@@ -542,22 +529,12 @@ public class CardLayoutTest extends JFrame implements ActionListener {
         panelTwelveButtons.add(btn_back_fromPanelTwelve);
         panelTwelve.add(panelTwelveButtons, BorderLayout.SOUTH);
 
-        // Create Panel Thirteen
-        panelThirteen = new JPanel(new BorderLayout());
-        panelThirteen.setBackground(Color.LIGHT_GRAY);
-
-        panelThirteen_ReservationButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        panelThirteen_ReservationButtons.setBackground(Color.blue);
-        panelThirteen.add(panelThirteen_ReservationButtons, BorderLayout.CENTER);
-        
         
         
         // Create Panel Thirteen
         panelThirteen = new JPanel(new BorderLayout());
-        panelThirteen.setBackground(Color.LIGHT_GRAY);
 
         panelThirteen_ReservationButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        panelThirteen_ReservationButtons.setBackground(Color.blue);
         panelThirteen.add(panelThirteen_ReservationButtons, BorderLayout.CENTER);
 
         JButton btn_back_fromPanelThirteen = new JButton("Back to High Level Info");
@@ -575,7 +552,6 @@ public class CardLayoutTest extends JFrame implements ActionListener {
         
         // Create Panel Fourteen
         panelFourteen = new JPanel(new BorderLayout());
-        panelFourteen.setBackground(Color.LIGHT_GRAY);
 
         reservationDetailsLabel = new JLabel();
 
@@ -598,7 +574,6 @@ public class CardLayoutTest extends JFrame implements ActionListener {
         
         // Create Panel Fifteen
         panelFifteen = new JPanel(new BorderLayout());
-        panelFifteen.setBackground(Color.LIGHT_GRAY);
 
         panelFifteen_RoomButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         panelFifteen.add(panelFifteen_RoomButtons, BorderLayout.CENTER);
@@ -616,7 +591,6 @@ public class CardLayoutTest extends JFrame implements ActionListener {
 
         // Create Panel Sixteen
         panelSixteen = new JPanel(new BorderLayout());
-        panelSixteen.setBackground(Color.LIGHT_GRAY);
 
         panelThirteen_ReservationButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         panelSixteen.add(panelThirteen_ReservationButtons, BorderLayout.CENTER);
@@ -635,7 +609,6 @@ public class CardLayoutTest extends JFrame implements ActionListener {
         
         // Create Panel Seventeen
         panelSeventeen = new JPanel(new BorderLayout());
-        panelSeventeen.setBackground(Color.LIGHT_GRAY);
 
         panelSeventeen_DayButtons = new JPanel(new GridLayout(5, 7, 5, 5));
         panelSeventeen.add(panelSeventeen_DayButtons, BorderLayout.CENTER);
@@ -651,6 +624,103 @@ public class CardLayoutTest extends JFrame implements ActionListener {
         panelSeventeenButtons.add(btn_back_fromPanelSeventeen);
         panelSeventeen.add(panelSeventeenButtons, BorderLayout.SOUTH);
         
+        
+     // Create Panel Eighteen
+        panelEighteen = new JPanel(new BorderLayout());
+        panelEighteen.add(new JLabel("Make Reservation Panel"), BorderLayout.NORTH);
+
+        // Input Panel with controlled layout and sizing
+        JPanel panelEighteenContent = new JPanel();
+        panelEighteenContent.setLayout(new BoxLayout(panelEighteenContent, BoxLayout.Y_AXIS));
+        JTextField guestNameField = new JTextField();
+        guestNameField.setPreferredSize(new Dimension(200, 30));
+        JTextField checkInField = new JTextField();
+        checkInField.setPreferredSize(new Dimension(200, 30));
+        JTextField checkOutField = new JTextField();
+        checkOutField.setPreferredSize(new Dimension(200, 30));
+
+        panelEighteenContent.add(new JLabel("Guest Name:"));
+        panelEighteenContent.add(guestNameField);
+        panelEighteenContent.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelEighteenContent.add(new JLabel("Check-In Date (1-30):"));
+        panelEighteenContent.add(checkInField);
+        panelEighteenContent.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelEighteenContent.add(new JLabel("Check-Out Date (2-31):"));
+        panelEighteenContent.add(checkOutField);
+
+     // Submit button for creating the reservation
+        JButton createReservationButton = new JButton("Create Reservation");
+        createReservationButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String guestName = guestNameField.getText();
+                String checkInText = checkInField.getText();
+                String checkOutText = checkOutField.getText();
+
+                if (guestName.isEmpty() || checkInText.isEmpty() || checkOutText.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "All fields must be filled.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                try {
+                    int checkIn = Integer.parseInt(checkInText);
+                    int checkOut = Integer.parseInt(checkOutText);
+
+                    if (checkIn < 1 || checkIn > 30 || checkOut <= checkIn || checkOut > 31) {
+                        JOptionPane.showMessageDialog(null, "Invalid check-in or check-out date.", "Date Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    boolean available = true;
+                    for (int i = checkIn - 1; i < checkOut - 1; i++) {
+                        if (!selectedRoom.getAvailability()[i]) {
+                            available = false;
+                            break;
+                        }
+                    }
+
+                    if (!available) {
+                        JOptionPane.showMessageDialog(null, "Room is not available for the selected dates.", "Availability Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    int confirm = JOptionPane.showConfirmDialog(null, "Create reservation for " + guestName + " from day " + checkIn + " to day " + checkOut + "?", "Confirm Reservation", JOptionPane.YES_NO_OPTION);
+                    if (confirm == JOptionPane.YES_OPTION) {
+                        Reservation newReservation = new Reservation(guestName, checkIn, checkOut, selectedRoom);
+                        selectedHotel.addReservation(newReservation);
+                        for (int i = checkIn - 1; i < checkOut - 1; i++) {
+                            selectedRoom.setAvailability(i, false);
+                        }
+                        updatePanelThirteen();
+                        updatePanelSixteen();
+                        guestNameField.setText("");
+                        checkInField.setText("");
+                        checkOutField.setText("");
+                        JOptionPane.showMessageDialog(null, "Reservation created successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Please enter valid numbers for check-in and check-out dates.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+        // button panel at the bottom
+        JButton btn_back_fromPanelEighteen = new JButton("Back to Main Panel");
+        btn_back_fromPanelEighteen.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cardlayout.show(rootPanel, "Panel One");
+            }
+        });
+
+
+        JPanel panelEighteenButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        panelEighteenButtons.add(createReservationButton);
+        panelEighteenButtons.add(btn_back_fromPanelEighteen);
+
+        // Add input panel and button panel to center panel
+        JPanel centerPanelEighteen = new JPanel(new BorderLayout());
+        centerPanelEighteen.add(panelEighteenContent, BorderLayout.NORTH);
+        centerPanelEighteen.add(panelEighteenButtons, BorderLayout.SOUTH);
+        panelEighteen.add(centerPanelEighteen, BorderLayout.CENTER);
         
 	        
 	    // Add panels to rootPanel with identifiers
@@ -671,6 +741,7 @@ public class CardLayoutTest extends JFrame implements ActionListener {
         rootPanel.add(panelFifteen, "Panel Fifteen");
         rootPanel.add(panelSixteen, "Panel Sixteen");
         rootPanel.add(panelSeventeen, "Panel Seventeen");
+        rootPanel.add(panelEighteen, "Panel Eighteen");
 
 	    // Set up the content pane with buttons and the rootPanel
 	    getContentPane().setLayout(new BorderLayout());
@@ -717,11 +788,22 @@ public class CardLayoutTest extends JFrame implements ActionListener {
 	            cardlayout.show(rootPanel, "Panel Seven");
 	        }
 	     else if (e.getSource() == btn8) {
-	            cardlayout.show(rootPanel, "Panel Eight");
+	    	 if (selectedHotel == null) {
+	                JOptionPane.showMessageDialog(null, "Please choose a hotel first.", "Selection Error", JOptionPane.ERROR_MESSAGE);
+	            } else {
+	            	updatePanelEight();
+		            cardlayout.show(rootPanel, "Panel Eight");
+	            }
+	    	 	
 	        }
 	     else if (e.getSource() == btn9) {
-	    	 	updatePanelNine();
-	            cardlayout.show(rootPanel, "Panel Nine");
+	    	 if (hotels.isEmpty()) {
+	    		 JOptionPane.showMessageDialog(null, "There are currently no hotels.", "Selection Error", JOptionPane.ERROR_MESSAGE);
+	    	 } else {
+	    		 updatePanelNine();
+	    		 cardlayout.show(rootPanel, "Panel Nine"); 
+	    	 }
+	    	 	
 	        }
 	    }
 		
@@ -841,7 +923,7 @@ public class CardLayoutTest extends JFrame implements ActionListener {
 	        panelFifteen_RoomButtons.repaint();
 	    }
 
-	    private void updatePanelSixteen() {
+	 private void updatePanelSixteen() {
 	        panelThirteen_ReservationButtons.removeAll();
 	        if (selectedHotel != null) {
 	            for (Reservation reservation : selectedHotel.getReservations()) {
@@ -867,6 +949,24 @@ public class CardLayoutTest extends JFrame implements ActionListener {
 	        }
 	        panelThirteen_ReservationButtons.revalidate();
 	        panelThirteen_ReservationButtons.repaint();
+	    }
+	 
+	 private void updatePanelEight() {
+	        panelEight_RoomButtons.removeAll();
+	        if (selectedHotel != null) {
+	            for (Room room : selectedHotel.getRooms()) {
+	                JButton roomButton = new JButton(room.getName());
+	                roomButton.addActionListener(new ActionListener() {
+	                    public void actionPerformed(ActionEvent e) {
+	                        selectedRoom = room;
+	                        cardlayout.show(rootPanel, "Panel Eighteen");
+	                    }
+	                });
+	                panelEight_RoomButtons.add(roomButton);
+	            }
+	        }
+	        panelEight_RoomButtons.revalidate();
+	        panelEight_RoomButtons.repaint();
 	    }
 	    
 	    private void updatePanelNine() {
@@ -916,6 +1016,9 @@ public class CardLayoutTest extends JFrame implements ActionListener {
 	        panelSeventeen_DayButtons.revalidate();
 	        panelSeventeen_DayButtons.repaint();
 	    }
+	    
+	    
+	    
 	 
 	// Method to update panels with the selected hotel's high level info
 	 private void updateHotelInfoPanels() {

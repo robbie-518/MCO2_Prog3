@@ -37,8 +37,8 @@ public class Room {
         }
     }
     
-    public void bookDate(int i) {
-    	availability[i - 1] = false;
+    public void setAvailability(int day, boolean value) {
+    	availability[day] = value;
     }
     
     public boolean setAvailability(int day) { // changes date availability, returns true if successful
