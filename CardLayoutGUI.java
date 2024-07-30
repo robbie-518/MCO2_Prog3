@@ -17,6 +17,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+
+/**
+ * The CardLayoutGUI class is a JFrame that manages the Hotel Reservation System GUI
+ */
+
 public class CardLayoutGUI extends JFrame implements ActionListener {
 	
 	JButton btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
@@ -26,8 +31,98 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
 
     CardLayout cardlayout;
     JPanel rootPanel;
-    JPanel panelOne, panelTwo, panelThree, panelFour, panelFive, panelSix, panelSeven, panelEight, panelNine;
-    JPanel panelTen, panelEleven, panelTwelve, panelThirteen, panelFourteen, panelFifteen, panelSixteen, panelSeventeen, panelEighteen;
+    
+    /**
+     * Panel for the main menu of the Hotel Reservation System.
+     */
+    private JPanel panelOne;
+
+    /**
+     * Panel for creating a new hotel.
+     */
+    private JPanel panelTwo;
+
+    /**
+     * Panel for viewing a hotel.
+     */
+    private JPanel panelThree;
+
+    /**
+     * Panel for editing a hotel.
+     */
+    private JPanel panelFour;
+
+    /**
+     * Panel for viewing hotel information.
+     */
+    private JPanel panelFive;
+
+    /**
+     * Panel for displaying high-level information about a hotel.
+     */
+    private JPanel panelSix;
+
+    /**
+     * Panel for displaying low-level information about a hotel.
+     */
+    private JPanel panelSeven;
+
+    /**
+     * Panel for choosing a room for reservation.
+     */
+    private JPanel panelEight;
+
+    /**
+     * Panel for choosing a hotel.
+     */
+    private JPanel panelNine;
+
+    /**
+     * Panel for displaying low-level information based on a selected date.
+     */
+    private JPanel panelTen;
+
+    /**
+     * Panel for choosing a room to view information about.
+     */
+    private JPanel panelEleven;
+
+    /**
+     * Panel for displaying detailed information about a selected room.
+     */
+    private JPanel panelTwelve;
+
+    /**
+     * Panel for choosing a reservation to view information about.
+     */
+    private JPanel panelThirteen;
+
+    /**
+     * Panel for displaying detailed information about a selected reservation.
+     */
+    private JPanel panelFourteen;
+
+    /**
+     * Panel for choosing a room to modify.
+     */
+    private JPanel panelFifteen;
+
+    /**
+     * Panel for choosing a reservation to modify.
+     */
+    private JPanel panelSixteen;
+
+    /**
+     * Panel for modifying the price for specific dates.
+     */
+    private JPanel panelSeventeen;
+
+    /**
+     * Panel for creating a new reservation.
+     */
+    private JPanel panelEighteen;
+    
+    
     JPanel panelNine_HotelButtons, panelEleven_RoomButtons, panelFifteen_RoomButtons, panelThirteen_ReservationButtons, panelSixteen_ReservationButtons, panelSeventeen_DayButtons, panelEight_RoomButtons;
 
     private JLabel hotelNameLabel, totalRoomsLabel, estimatedEarningsLabel;
@@ -42,6 +137,10 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
     private Room selectedRoom;
     private Reservation selectedReservation;
     private int selectedDate;
+    
+    /**
+     * Constructs a new CardLayoutGUI, initializes the components, and sets up the JFrame.
+     */
 	
     public CardLayoutGUI() {
 		
@@ -181,7 +280,7 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
 	    	}
 	    });
 	        
-	    // button panel at the bottom
+	    // button panel at for buttons
 	    JPanel panelTwoButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
 	    panelTwoButtons.add(submitButton);
 	    panelTwoButtons.add(btn1_back_fromPanelTwo);
@@ -759,24 +858,24 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
         
 	        
 	    // Add panels to rootPanel with identifiers
-        rootPanel.add(panelOne, "Panel One");
-        rootPanel.add(panelTwo, "Panel Two");
-        rootPanel.add(panelThree, "Panel Three");
-        rootPanel.add(panelFour, "Panel Four");
-        rootPanel.add(panelFive, "Panel Five");
-        rootPanel.add(panelSix, "Panel Six");
-        rootPanel.add(panelSeven, "Panel Seven");
-        rootPanel.add(panelEight, "Panel Eight");
-        rootPanel.add(panelNine, "Panel Nine");
-        rootPanel.add(panelTen, "Panel Ten");
-        rootPanel.add(panelEleven, "Panel Eleven");
-        rootPanel.add(panelTwelve, "Panel Twelve");
-        rootPanel.add(panelThirteen, "Panel Thirteen");
-        rootPanel.add(panelFourteen, "Panel Fourteen");
-        rootPanel.add(panelFifteen, "Panel Fifteen");
-        rootPanel.add(panelSixteen, "Panel Sixteen");
-        rootPanel.add(panelSeventeen, "Panel Seventeen");
-        rootPanel.add(panelEighteen, "Panel Eighteen");
+        rootPanel.add(panelOne, "Panel One"); // Main Panel
+        rootPanel.add(panelTwo, "Panel Two"); // Create Hotel
+        rootPanel.add(panelThree, "Panel Three"); // View Hotel
+        rootPanel.add(panelFour, "Panel Four"); // Edit Hotel
+        rootPanel.add(panelFive, "Panel Five"); // View Hotel Info
+        rootPanel.add(panelSix, "Panel Six"); // Low Level Info Panel
+        rootPanel.add(panelSeven, "Panel Seven"); // High Level Info Panel
+        rootPanel.add(panelEight, "Panel Eight"); // Choose Room -> Reservation
+        rootPanel.add(panelNine, "Panel Nine"); // Choose Hotel
+        rootPanel.add(panelTen, "Panel Ten"); // Display Low Level Info - Date
+        rootPanel.add(panelEleven, "Panel Eleven"); // Choose Room -> Info
+        rootPanel.add(panelTwelve, "Panel Twelve"); // Display Low Level Info - Room
+        rootPanel.add(panelThirteen, "Panel Thirteen"); // Choose Reservation -> Info
+        rootPanel.add(panelFourteen, "Panel Fourteen"); // Display Low Level Info - Reservation
+        rootPanel.add(panelFifteen, "Panel Fifteen"); // Choose Room -> Modify
+        rootPanel.add(panelSixteen, "Panel Sixteen"); // Choose Reservation -> Modify
+        rootPanel.add(panelSeventeen, "Panel Seventeen"); // Choose Date Price -> Modify
+        rootPanel.add(panelEighteen, "Panel Eighteen"); // Create Reservation
 
 	    // Set up the content pane with buttons and the rootPanel
 	    getContentPane().setLayout(new BorderLayout());
@@ -788,7 +887,12 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
 	    
 		
 	}
-	
+    
+    /**
+     * Handles action events for the buttons in the GUI.
+     *
+     * @param e the ActionEvent triggered by button clicks
+     */	
 	 @Override
 	 public void actionPerformed(ActionEvent e) {
 		 if (e.getSource() ==  btn1_back_fromPanelTwo || e.getSource() ==  btn1_back_fromPanelThree || e.getSource() ==  btn1_back_fromPanelEight || e.getSource() ==  btn1_back_fromPanelNine) {
@@ -842,7 +946,12 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
 	        }
 	    }
 		
-		
+	 
+	 /**
+	 * Adds a button for the newly created hotel to the panel and updates the panel.
+	 *
+	 * @param hotel the Hotel object to add a button for
+	 */		
 	 public void addHotelButton(Hotel hotel) { // method to be added into hotel creation constructor
 		 JButton hotelButton = new JButton(hotel.getHotelName());
 		 hotelButton.addActionListener(new ActionListener() {
@@ -859,6 +968,9 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
 		 
 	 }
 	 
+	 /**
+	 * Updates the selected date information and displays the availability of rooms for the selected date.
+	 */	 
 	 private void updatePanelTen() {
 	        if (selectedHotel != null) {
 	            dateLabel.setText("Selected Date: Day " + selectedDate);
@@ -867,6 +979,9 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
 	        }
 	    }
 	 
+	 /**
+	 * Updates the panel displaying room information.
+	 */	 
 	 private void updatePanelEleven() {
 	        panelEleven_RoomButtons.removeAll();
 	        if (selectedHotel != null) {
@@ -886,6 +1001,10 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
 	        panelEleven_RoomButtons.repaint();
 	    }
 	 
+	 
+	 /**
+	 * Updates the panel displaying detailed information about the selected room.
+	 */	 
 	 private void updatePanelTwelve() {
 	        if (selectedRoom != null) {
 	            roomNameLabel.setText("Room Name: " + selectedRoom.getName());
@@ -896,6 +1015,11 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
 	        }
 	    }
 	 
+	 
+	 
+	 /**
+	 * Updates the panel displaying reservations for the selected hotel.
+	 */
 	 private void updatePanelThirteen() {
 	        panelThirteen_ReservationButtons.removeAll();
 	        if (selectedHotel != null) {
@@ -915,6 +1039,11 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
 	        panelThirteen_ReservationButtons.repaint();
 	    }
 	 
+	 
+	 
+	 /**
+	 * Updates the panel displaying detailed information about the selected reservation.
+	 */
 	 private void updatePanelFourteen() {
 		    if (selectedReservation != null) {
 		        guestNameLabel.setText("Guest Name: " + selectedReservation.getGuestName());
@@ -936,6 +1065,9 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
 		}
 
 	 
+	 /**
+	 * Updates the panel displaying buttons for removing rooms.
+	 */
 	 private void updatePanelFifteen() {
 	        panelFifteen_RoomButtons.removeAll();
 	        if (selectedHotel != null) {
@@ -969,6 +1101,10 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
 	        panelFifteen_RoomButtons.repaint();
 	    }
 
+	 
+	 /**
+	 * Updates the panel displaying buttons for removing reservations.
+	 */
 	 private void updatePanelSixteen() {
 		    panelSixteen_ReservationButtons.removeAll();
 		    if (selectedHotel != null) {
@@ -998,6 +1134,9 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
 		}
 
 	 
+	 /**
+	 * Updates the panel displaying buttons for making a reservation.
+	 */
 	 private void updatePanelEight() {
 	        panelEight_RoomButtons.removeAll();
 	        if (selectedHotel != null) {
@@ -1015,6 +1154,11 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
 	        panelEight_RoomButtons.revalidate();
 	        panelEight_RoomButtons.repaint();
 	    }
+	 
+	 
+	 	/**
+	    * Updates the panel displaying buttons for selecting a hotel.
+	    */
 	    
 	    private void updatePanelNine() {
 	        panelNine_HotelButtons.removeAll();
@@ -1033,6 +1177,11 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
 	        panelNine_HotelButtons.repaint();
 	    }
 	    
+	    
+	    
+	    /**
+	     * Updates the panel displaying buttons for changing date price modifiers.
+	     */	    
 	    private void updatePanelSeventeen() {
 	        panelSeventeen_DayButtons.removeAll();
 	        for (int i = 1; i <= 31; i++) {
@@ -1067,7 +1216,9 @@ public class CardLayoutGUI extends JFrame implements ActionListener {
 	    
 	    
 	 
-	    // Method to update panels with the selected hotel's high level info
+	    /**
+	     * Updates the panels with the selected hotel's high level information.
+	     */
 	    private void updateHotelInfoPanels() {
 	        if (selectedHotel != null) {
 	            hotelNameLabel.setText("Hotel Name: " + selectedHotel.getHotelName());
